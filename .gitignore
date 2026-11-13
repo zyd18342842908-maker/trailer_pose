@@ -1,0 +1,40 @@
+# Catkin build output
+/build/
+/devel/
+/install/
+/log/
+/logs/
+/.catkin_tools/
+
+# Local Python environments and caches
+/.venv*/
+/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local datasets and labels; keep the data-layout instructions
+/src/trailer_pose/data/*
+!/src/trailer_pose/data/README.md
+*.pcd
+*.PCD
+*.bag
+*.mcap
+*.db3
+
+# Local tools, credentials and editor state
+/.agents/
+/.codex/
+/.aws/
+/.idea/
+/.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log
+.DS_Store
+/1.png

@@ -1,0 +1,27 @@
+<launch>
+  <!-- 离线PCD测试：发布点云 + 位姿估计 -->
+  <arg name="pcd_dir" default="$(find trailer_pose)/data/bag_combined/record20260818_103645"/>
+  <arg name="rate" default="10"/>
+  <arg name="multi_frame" default="5"/>
+  <arg name="model_path" default="$(find trailer_pose)/models/best_pose_model.pth"/>
+  <arg name="trailer_type" default=""/>
+  <arg name="type_topic" default="/trailer_type"/>
+
+  <node pkg="trailer_pose" type="pcd_publisher.py" name="pcd_publisher" output="screen">
+    <param name="pcd_dir" value="$(arg pcd_dir)"/>
+    <param name="topic" value="/points_raw"/>
+    <param name="rate" value="$(arg rate)"/>
+    <param name="frame_id" value="lidar"/>
+    <param name="loop" value="true"/>
+  </node>
+
+  <node pkg="trailer_pose" type="trailer_pose_node.py" name="trailer_pose_estimator" output="screen">
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="trailer_type" value="$(arg trailer_type)" type="str"/>
+    <param name="type_topic" value="$(arg type_topic)"/>
+    <param name="cloud_topic" value="/points_raw"/>
+    <param name="pose_topic" value="/trailer_pose"/>
+    <param name="frame_id" value="lidar"/>
+    <param name="multi_frame" value="$(arg multi_frame)"/>
+  </node>
+</launch>

@@ -1,0 +1,16 @@
+<launch>
+  <!-- 拖挂/托盘位姿估计节点 -->
+  <arg name="model_path" default="$(find trailer_pose)/models/best_pose_model.pth"/>
+  <arg name="trailer_type" default=""/>
+  <arg name="type_topic" default="/trailer_type"/>
+  <arg name="multi_frame" default="5"/>
+  <node pkg="trailer_pose" type="trailer_pose_node.py" name="trailer_pose_estimator" output="screen">
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="trailer_type" value="$(arg trailer_type)" type="str"/>
+    <param name="type_topic" value="$(arg type_topic)"/>
+    <param name="cloud_topic" value="/points_raw"/>
+    <param name="pose_topic" value="/trailer_pose"/>
+    <param name="frame_id" value="lidar"/>
+    <param name="multi_frame" value="$(arg multi_frame)"/>
+  </node>
+</launch>
